@@ -1,3 +1,4 @@
+import Table from "../components/Tabela";
 import Titulo from "../components/Titulo"
 import ListaDeTarefas from "../containers/Lista"
 import GlobalStyle, { Container } from "../styles"
@@ -9,7 +10,8 @@ function Main(){
             <Container>
                 <Titulo title='Contact List'/>
             </Container>
-            <ListaDeTarefas />
+            <ListaDeTarefas/>
+            <Table/>
         </>
     )
 }
