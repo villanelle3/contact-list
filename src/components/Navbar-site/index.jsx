@@ -1,14 +1,11 @@
 import { Disclosure, } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom';
+import smartphone from '../icons/smartphone.png'
 
 const navigation = [
     { name: 'Home', href: '/', },
     { name: 'About us', href: '/about', },
-    { name: 'Projects', href: '/projects', },
-    { name: 'Blog', href: '/blog', },
-    { name: 'Registration', href: '/registration', },
-    { name: 'Contact', href: 'contact', },
 ]
 
 function classNames(...classes) {
@@ -17,14 +14,14 @@ function classNames(...classes) {
 
 export default function Header() {
     return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-red-500">
         {({ open }) => (
         <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-yellow-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -37,12 +34,12 @@ export default function Header() {
                     <div className="flex flex-shrink-0 items-center">
                     <img
                         className="block h-8 w-auto lg:hidden"
-                        src="https://cdn-icons-png.flaticon.com/512/3163/3163478.png"
+                        src={smartphone}
                         alt="Your Company"
                     />
                     <img
                         className="hidden h-8 w-auto lg:block"
-                        src="https://cdn-icons-png.flaticon.com/512/3163/3163478.png"
+                        src={smartphone}
                         alt="Your Company"
                     />
                     </div>
@@ -56,8 +53,8 @@ export default function Header() {
                             return (
                                 'block px-3 py-2 rounded-md text-base font-medium no-underline ' +
                                 (!isActive
-                                    ? ' text-gray-300 hover:bg-red-700 hover:text-white'
-                                    : 'bg-red-900 text-white')
+                                    ? ' text-gray-300 hover:bg-yellow-700 hover:text-white'
+                                    : 'bg-yellow-600 text-white')
                             );
                         }}
                         >
@@ -77,7 +74,7 @@ export default function Header() {
                     as="a"
                     href={item.href}
                     className={classNames(
-                        item.current ? 'bg-red-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        item.current ? 'bg-yellow-600 text-white' : 'text-gray-300 hover:bg-yellowy-700 hover:text-white',
                         'block rounded-md px-3 py-2 text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
