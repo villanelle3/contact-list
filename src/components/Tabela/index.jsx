@@ -1,10 +1,12 @@
-import Item from "../TableItem";
 import { useState, useEffect } from "react";
+import Table from 'react-bootstrap/Table';
+import { Cont } from "./styles";
 
-export default function Table() {
+export default function MyTable() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [number, setNumber] = useState(0);
     useEffect(() => {
         fetch(`https://my-json-server.typicode.com/villanelle3/fake-api-3/people`)
             .then((response) => {
@@ -18,6 +20,7 @@ export default function Table() {
                 console.log(actualData) // Print data
                 setData(actualData);
                 setError(null);
+                setNumber(actualData.length);
             })
             .catch((err) => {
                 console.log(err.message); // Print data
@@ -28,31 +31,43 @@ export default function Table() {
                 setLoading(false);
             });
         }, []);
+        //setNumber(data.length);
     return (
-        <div className="container mx-auto px-60">
-            <div className="flex flex-col">
-                <div className="overflow-x-auto">
-                    <div className="p-1.5 w-full inline-block align-middle">
-                        <div className="overflow-hidden border rounded-lg">
-                            <table className="min-w-full divide-y divide-gray-200">
-                                <tbody className="divide-y divide-gray-200">
-                                    {/* =============================================================================== */}
-                                    {loading && <div>A moment please...</div>}
-                                    {error && (
-                                        <div>{`There is a problem fetching the data - ${error}`}</div>
-                                    )}
-                                    {data &&
-                                        data.map(({ id, name, email, phone }) => (
-                                            <div key={id}><Item  id={id} name={name} email={email} phone={phone} /></div>
-                                        ))
-                                    }
-                                    {/* =============================================================================== */}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <>
+            <Cont>
+                <Table bordered hover>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* =============================================================================== */}
+                    {loading && <div>A moment please...</div>}
+                        {error && (
+                            <div>{`There is a problem fetching the data - ${error}`}</div>
+                        )}
+                        {data &&
+                                data.map(({ id, name, email, phone }) => (
+                                    <tr key={id}>
+                                        <td>{name}</td>
+                                        <td>{email}</td>
+                                        <td>{phone}</td>
+                                        <td><a className="text-green-500 hover:text-green-700" href="/"> Edit</a>
+                                        </td>
+                                        <td><a className="text-red-500 hover:text-red-700" href="/"> Delete </a></td>
+                                    </tr>
+                            ))
+                        }
+                    {/* =============================================================================== */}
+                </tbody>
+                </Table>
+            </Cont>
+            <p>{number}</p>
+        </>
     );
 }
