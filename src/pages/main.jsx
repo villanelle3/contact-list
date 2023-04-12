@@ -8,8 +8,8 @@ function Main(){
             <GlobalStyle/>
             <Container>
                 <Titulo title='Contact List'/>
-                <ListaDeTarefas />
             </Container>
+            <ListaDeTarefas />
         </>
     )
 }
