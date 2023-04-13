@@ -28,8 +28,11 @@ const ListaDeTarefas = () => (
                                 <Form.Control type="phone" placeholder="Phone number" />
                             </Form.Group>
                         </Col>
-                        <Col>
+                    </Row>
+                    <Row>
+                        <Col className='mt-2'>
                             <S.BtnAddPerson>Add +</S.BtnAddPerson>
+                            <S.BtnAddPerson className='ml-3' inputColor="rgb(220 38 38)" inputHover="rgb(248 113 113)">Cancel</S.BtnAddPerson>
                         </Col>
                     </Row>
                 </Form>

@@ -22,7 +22,7 @@ export const BtnAdd = styled.button`
 `
 
 export const BtnAddPerson = styled.button`
-    background-color: rgb(161 98 7);
+    background-color: ${props => props.inputColor || "rgb(161 98 7)"};
     padding: 8px;
     color:white;
     font-weigth: bold;
@@ -31,6 +31,6 @@ export const BtnAddPerson = styled.button`
     transition: 0.5s;
     font-size: 0.85em;
     &:hover{
-        background-color: rgb(202 138 4);
+        background-color: ${props => props.inputHover || "rgb(202 138 4)"};
     }
 `
