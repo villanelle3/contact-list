@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
-import { Cont } from "./styles";
+import { Cont, Par } from "./styles";
 
 export default function MyTable() {
     const [data, setData] = useState(null);
@@ -67,7 +67,7 @@ export default function MyTable() {
                 </tbody>
                 </Table>
             </Cont>
-            <p>{number}</p>
+            <Par>{number > 0 ? `Total number of contacts: ${number} ` : "No contacts yet!"}</Par>
         </>
     );
 }
