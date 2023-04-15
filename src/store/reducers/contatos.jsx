@@ -5,7 +5,7 @@ const initialState = [
     new Contato(14, 'Gastão Azevedo', 'exemple@expemle.com', '99 99999-9999' )
 ]
 
-const counterSlice = createSlice({
+const contatoSlice = createSlice({
     name: 'contatos',
     initialState,
     reducers: {
@@ -15,5 +15,5 @@ const counterSlice = createSlice({
     },
 })
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
-export default counterSlice.reducer
+export const { remover } = contatoSlice.actions
+export default contatoSlice.reducer
