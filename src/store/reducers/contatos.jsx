@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import Contato from '../../models/Contato'
 
 const initialState = [
-    new Contato(14, 'Gastão Azevedo', 'exemple@expemle.com', '99 99999-9999' )
+    new Contato(14, 'Gastão Azevedo', 'example@redux.com', '(99) 99999-9999' ),
+    new Contato(15, 'Gonzalo Bruno', 'example@redux.com', '(99) 99999-9999' )
 ]
 
 const contatoSlice = createSlice({

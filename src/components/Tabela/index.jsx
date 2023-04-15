@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import { Cont, Par } from "./styles";
+import { useSelector } from 'react-redux'
 
 export default function MyTable() {
+    const { contatos } = useSelector(state => state)
+
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -64,6 +67,16 @@ export default function MyTable() {
                             ))
                         }
                     {/* =============================================================================== */}
+                    {contatos.map((t) => (
+                        <tr key={ t.id }>
+                            <td>{ t.nome }</td>
+                            <td>{ t.email }</td>
+                            <td>{ t.telefone }</td>
+                            <td><a className="text-green-500 hover:text-green-700" href="/"> Edit</a>
+                            </td>
+                            <td><a className="text-red-500 hover:text-red-700" href="/"> Delete </a></td>
+                        </tr>
+                    ))}
                 </tbody>
                 </Table>
             </Cont>
