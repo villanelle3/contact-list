@@ -4,7 +4,8 @@ import { Cont, Par } from "./styles";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {remover } from '../../store/reducers/contatos';
-import Modal from "../Modal";
+import ModalEdit from "../Modal";
+// import Modal from "../Modal";
 
 export default function MyTable() {
     const { itens } = useSelector(state => state.contatos);
@@ -73,7 +74,8 @@ export default function MyTable() {
                                     <td>{name}</td>
                                     <td>{email}</td>
                                     <td>{phone}</td>
-                                    <td><Modal name={name} email={email} phone={phone} /></td>
+                                    {/* <td><Modal name={name} email={email} phone={phone} /></td> */}
+                                    <td><ModalEdit/></td>
                                     <td><button className="text-red-500 hover:text-red-700" type="button" onClick={() => handleRemove(id)} > Delete </button></td>
                                 </tr>
                             ))
@@ -84,7 +86,8 @@ export default function MyTable() {
                             <td>{ t.nome }</td>
                             <td>{ t.email }</td>
                             <td>{ t.telefone }</td>
-                            <td><Modal name={t.nome} email={t.email} phone={t.telefone} /></td>
+                            {/* <td><Modal name={t.nome} email={t.email} phone={t.telefone} /></td> */}
+                            <td><ModalEdit/></td>
                             <td><button className="text-red-500 hover:text-red-700" onClick={() => handleRemoveRedux(t.id)} > Delete </button></td>
                         </tr>
                     ))}
