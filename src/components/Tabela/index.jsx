@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import { Cont, Par } from "./styles";
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import {remover } from '../../store/reducers/contatos';
 
 export default function MyTable() {
-    const { contatos } = useSelector(state => state)
-
+    const { itens } = useSelector(state => state.contatos);
+    const dispatch = useDispatch();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [number, setNumber] = useState(0);
+    const [reduxData, setreduxData] = useState(itens.length);
+
     useEffect(() => {
         fetch(`https://my-json-server.typicode.com/villanelle3/fake-api-3/people`)
             .then((response) => {
@@ -34,7 +38,15 @@ export default function MyTable() {
                 setLoading(false);
             });
         }, []);
-        //setNumber(data.length);
+        function handleRemove(id) {
+            const newList = data.filter((item) => item.id !== id);
+            setData(newList);
+            setNumber(number - 1);
+        }
+        function handleRemoveRedux(id) {
+            dispatch(remover(id));
+            setreduxData(reduxData - 1);
+        }
     return (
         <>
             <Cont>
@@ -49,38 +61,38 @@ export default function MyTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* =============================================================================== */}
+                    {/* ============================== CONTATOS VIA API ================================================= */}
                     {loading && <div>A moment please...</div>}
                         {error && (
                             <div>{`There is a problem fetching the data - ${error}`}</div>
                         )}
                         {data &&
-                                data.map(({ id, name, email, phone }) => (
-                                    <tr key={id}>
-                                        <td>{name}</td>
-                                        <td>{email}</td>
-                                        <td>{phone}</td>
-                                        <td><a className="text-green-500 hover:text-green-700" href="/"> Edit</a>
-                                        </td>
-                                        <td><a className="text-red-500 hover:text-red-700" href="/"> Delete </a></td>
-                                    </tr>
+                            data.map(({ id, name, email, phone }) => (
+                                <tr key={id}>
+                                    <td>{name}</td>
+                                    <td>{email}</td>
+                                    <td>{phone}</td>
+                                    <td><button className="text-green-500 hover:text-green-700"> Edit</button>
+                                    </td>
+                                    <td><button className="text-red-500 hover:text-red-700" type="button" onClick={() => handleRemove(id)} > Delete </button></td>
+                                </tr>
                             ))
                         }
-                    {/* =============================================================================== */}
-                    {contatos.map((t) => (
+                    {/* ============================ CONTATOS VIA REDUX =================================================== */}
+                    {itens.map((t) => (
                         <tr key={ t.id }>
                             <td>{ t.nome }</td>
                             <td>{ t.email }</td>
                             <td>{ t.telefone }</td>
-                            <td><a className="text-green-500 hover:text-green-700" href="/"> Edit</a>
+                            <td><button className="text-green-500 hover:text-green-700"> Edit</button>
                             </td>
-                            <td><a className="text-red-500 hover:text-red-700" href="/"> Delete </a></td>
+                            <td><button className="text-red-500 hover:text-red-700" onClick={() => handleRemoveRedux(t.id)} > Delete </button></td>
                         </tr>
                     ))}
                 </tbody>
                 </Table>
             </Cont>
-            <Par>{number > 0 ? `Total number of contacts: ${number} ` : "No contacts yet!"}</Par>
+            <Par>{number + reduxData > 0 ? `Total number of contacts: ${number + reduxData} ` : "No contacts yet!"}</Par>
         </>
     );
 }
