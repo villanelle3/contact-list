@@ -20,3 +20,5 @@ const contatoSlice = createSlice({
 
 export const { remover } = contatoSlice.actions
 export default contatoSlice.reducer
+
+// className="text-green-500 hover:text-green-700"
