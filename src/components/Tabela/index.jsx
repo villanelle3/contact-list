@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { Cont, Par } from "./styles";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import {remover } from '../../store/reducers/contatos';
+import {remover, editar } from '../../store/reducers/contatos';
 import ModalEdit from "../Modal";
 // import Modal from "../Modal";
 
@@ -26,13 +26,12 @@ export default function MyTable() {
                 return response.json();
             })
             .then((actualData) => {
-                console.log(actualData) // Print data
                 setData(actualData);
                 setError(null);
                 setNumber(actualData.length);
             })
             .catch((err) => {
-                console.log(err.message); // Print data
+                console.log(err.message);
                 setError(err.message);
                 setData(null);
             })
@@ -61,7 +60,9 @@ export default function MyTable() {
             setData(lista)
         }
         function updateContactRedux(id, NewName, NewPhone, NewEmail){  // Update item (API)
-            alert("TODO")
+            dispatch(editar({
+                id, nome: NewName, email: NewEmail, telefone: NewPhone
+            }))
         }
     return (
         <>
@@ -88,7 +89,6 @@ export default function MyTable() {
                                     <td>{name}</td>
                                     <td>{email}</td>
                                     <td>{phone}</td>
-                                    {/* <td><Modal name={name} email={email} phone={phone} /></td> */}
                                     <td>
                                         <ModalEdit id={id} name={name} email={email} phone={phone} updateContact={updateContact}/>
                                     </td>
@@ -109,7 +109,6 @@ export default function MyTable() {
                             <td>{ t.nome }</td>
                             <td>{ t.email }</td>
                             <td>{ t.telefone }</td>
-                            {/* <td><Modal name={t.nome} email={t.email} phone={t.telefone} /></td> */}
                             <td>
                                 <ModalEdit 
                                     id={t.id} 

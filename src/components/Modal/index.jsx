@@ -5,11 +5,16 @@ import { Botao } from './style';
 
 function ModalEdit(props) {
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [NewName, setNewName] = useState(props.name);
     const [NewPhone, setNewPhone] = useState(props.phone);
     const [NewEmail, setNewEmail] = useState(props.email);
+    function handleClose(){
+        setShow(false)
+        setNewName(props.name)
+        setNewPhone(props.phone)
+        setNewEmail(props.email)
+    }
 
     return (
         <>
@@ -25,6 +30,7 @@ function ModalEdit(props) {
                     <Form.Control
                         type="text"
                         placeholder="Name"
+                        autoComplete='off'
                         value={NewName}
                         autoFocus
                         onChange={(e) => {setNewName(e.target.value)}}
