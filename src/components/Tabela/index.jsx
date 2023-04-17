@@ -49,6 +49,20 @@ export default function MyTable() {
             dispatch(remover(id));
             setreduxData(reduxData - 1);
         }
+        function updateContact(id, NewName, NewPhone, NewEmail){  // Update item (API)
+            const lista = data.map((item) => {
+                if (id === item.id){
+                    return{...item, name: NewName, phone: NewPhone, email: NewEmail}
+                }
+                else{
+                    return item
+                }
+            })
+            setData(lista)
+        }
+        function updateContactRedux(id, NewName, NewPhone, NewEmail){  // Update item (API)
+            alert("TODO")
+        }
     return (
         <>
             <Cont>
@@ -75,8 +89,17 @@ export default function MyTable() {
                                     <td>{email}</td>
                                     <td>{phone}</td>
                                     {/* <td><Modal name={name} email={email} phone={phone} /></td> */}
-                                    <td><ModalEdit/></td>
-                                    <td><button className="text-red-500 hover:text-red-700" type="button" onClick={() => handleRemove(id)} > Delete </button></td>
+                                    <td>
+                                        <ModalEdit id={id} name={name} email={email} phone={phone} updateContact={updateContact}/>
+                                    </td>
+                                    <td>
+                                        <button 
+                                            className="text-red-500 hover:text-red-700" 
+                                            type="button" 
+                                            onClick={() => handleRemove(id)} > 
+                                            Delete 
+                                        </button>
+                                    </td>
                                 </tr>
                             ))
                         }
@@ -87,8 +110,20 @@ export default function MyTable() {
                             <td>{ t.email }</td>
                             <td>{ t.telefone }</td>
                             {/* <td><Modal name={t.nome} email={t.email} phone={t.telefone} /></td> */}
-                            <td><ModalEdit/></td>
-                            <td><button className="text-red-500 hover:text-red-700" onClick={() => handleRemoveRedux(t.id)} > Delete </button></td>
+                            <td>
+                                <ModalEdit 
+                                    id={t.id} 
+                                    name={t.nome} 
+                                    email={t.email} 
+                                    phone={t.telefone} 
+                                    updateContact={updateContactRedux}
+                                />
+                            </td>
+                            <td>
+                                <button className="text-red-500 hover:text-red-700" onClick={() => handleRemoveRedux(t.id)} > 
+                                    Delete 
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
