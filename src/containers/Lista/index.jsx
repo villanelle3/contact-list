@@ -8,6 +8,8 @@ import { useState } from 'react'
 import Contato from '../../models/Contato'
 import { cadastrar } from '../../store/reducers/contatos'
 import { useDispatch } from 'react-redux';
+import InputMask from 'react-input-mask';
+
 
 const ListaDeTarefas = function(props){
     const dispatch = useDispatch();
@@ -53,10 +55,12 @@ const ListaDeTarefas = function(props){
                             </Col>
                             <Col>
                                 <Form.Group controlId="formBasicPassword">
-                                    <Form.Control 
+                                    <InputMask
+                                        className="form-control"
                                         required 
                                         type="phone" 
                                         placeholder="Phone number"
+                                        mask="(99) 99999-9999"
                                         onChange={(event) => setTelefone(event.target.value)} 
                                     />
                                 </Form.Group>

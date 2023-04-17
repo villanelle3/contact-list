@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 function Main(){
     const [number, setNumber] = useState(0);
     const pull_data = (data) => {
-        setNumber(data); // LOGS DATA FROM CHILD
+        setNumber(data);
     }
     return (
         <Provider store={store}>
