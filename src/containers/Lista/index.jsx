@@ -5,13 +5,24 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { useState } from 'react'
+import Contato from '../../models/Contato'
+import { cadastrar } from '../../store/reducers/contatos'
+import { useDispatch } from 'react-redux';
 
-const ListaDeTarefas = function(){
+const ListaDeTarefas = function(props){
+    const dispatch = useDispatch();
     const [showForm, setshowForm] = useState(false)
+    const [Nome, setNome] = useState("")
+    const [Email, setEmail] = useState("")
+    const [Telefone, setTelefone] = useState("")
+    const [NewItens, setNewItens] = useState(0);
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('You clicked submit.');
+        setNewItens(NewItens + 1)
+        const newContact = new Contato(NewItens + 16, Nome, Email, Telefone)
+        dispatch(cadastrar(newContact))
     }
+    props.func(NewItens);
     return(
         <main>
             {
@@ -21,17 +32,33 @@ const ListaDeTarefas = function(){
                         <Row>
                             <Col>
                                 <Form.Group controlId="formBasicText">
-                                    <Form.Control type="text" placeholder="Name" />
+                                    <Form.Control 
+                                        autoComplete='off' 
+                                        required 
+                                        type="text" 
+                                        placeholder="Name"
+                                        onChange={(event) => setNome(event.target.value)} 
+                                    />
                                 </Form.Group>
                             </Col>
                             <Col>
                                 <Form.Group controlId="formBasicEmail">
-                                    <Form.Control type="email" placeholder="Email address" />
+                                    <Form.Control 
+                                        required 
+                                        type="email" 
+                                        placeholder="Email address"
+                                        onChange={(event) => setEmail(event.target.value)} 
+                                    />
                                 </Form.Group>
                             </Col>
                             <Col>
                                 <Form.Group controlId="formBasicPassword">
-                                    <Form.Control type="phone" placeholder="Phone number" />
+                                    <Form.Control 
+                                        required 
+                                        type="phone" 
+                                        placeholder="Phone number"
+                                        onChange={(event) => setTelefone(event.target.value)} 
+                                    />
                                 </Form.Group>
                             </Col>
                         </Row>

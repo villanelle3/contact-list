@@ -5,9 +5,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {remover, editar } from '../../store/reducers/contatos';
 import ModalEdit from "../Modal";
-// import Modal from "../Modal";
 
-export default function MyTable() {
+export default function MyTable(props) {
     const { itens } = useSelector(state => state.contatos);
     const dispatch = useDispatch();
     const [data, setData] = useState(null);
@@ -59,7 +58,7 @@ export default function MyTable() {
             })
             setData(lista)
         }
-        function updateContactRedux(id, NewName, NewPhone, NewEmail){  // Update item (API)
+        function updateContactRedux(id, NewName, NewPhone, NewEmail){  // Update item (Redux)
             dispatch(editar({
                 id, nome: NewName, email: NewEmail, telefone: NewPhone
             }))
@@ -81,7 +80,7 @@ export default function MyTable() {
                     {/* ============================== CONTATOS VIA API ================================================= */}
                     {loading && <div>A moment please...</div>}
                         {error && (
-                            <div>{`There is a problem fetching the data - ${error}`}</div>
+                            <div className="loading__error">{`There is a problem fetching the data - ${error}`}</div>
                         )}
                         {data &&
                             data.map(({ id, name, email, phone }) => (
@@ -128,7 +127,7 @@ export default function MyTable() {
                 </tbody>
                 </Table>
             </Cont>
-            <Par>{number + reduxData > 0 ? `Total number of contacts: ${number + reduxData} ` : "No contacts yet!"}</Par>
+            <Par>{number + reduxData > 0 ? `Total number of contacts: ${number + reduxData + props.newItens} ` : "No contacts yet!"}</Par>
         </>
     );
 }

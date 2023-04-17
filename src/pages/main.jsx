@@ -1,4 +1,5 @@
 import MyTable from "../components/Tabela";
+import { useState } from "react";
 import Titulo from "../components/Titulo"
 import ListaDeTarefas from "../containers/Lista"
 import GlobalStyle, { Container } from "../styles"
@@ -6,14 +7,18 @@ import store from '../store'
 import { Provider } from 'react-redux';
 
 function Main(){
+    const [number, setNumber] = useState(0);
+    const pull_data = (data) => {
+        setNumber(data); // LOGS DATA FROM CHILD
+    }
     return (
         <Provider store={store}>
             <GlobalStyle/>
             <Container>
                 <Titulo title='Contact List'/>
             </Container>
-            <ListaDeTarefas/>
-            <MyTable/>
+            <ListaDeTarefas func={pull_data} />
+            <MyTable newItens={number} />
         </Provider>
     )
 }
